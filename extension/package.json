@@ -1,11 +1,11 @@
 {
-  "name": "tedystarter",
-  "displayName": "TedyStarter",
+  "name": "vscode-mcd-helper",
+  "displayName": "VscodeMcdHelper",
   "version": "0.0.2",
-  "description": "Tedy Vscode Extension Starter",
+  "description": "vscode extension for mcd",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tangdaoyuan/vscode-extension-starter",
+    "url": "https://github.com/tangdaoyuan/vscode-mcd-helper",
     "directory": "extension"
   },
   "engines": {

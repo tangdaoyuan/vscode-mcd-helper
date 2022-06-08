@@ -1,10 +1,9 @@
 {
-  "name": "vscode-extension-starter",
+  "name": "vscode-mcd-helper-monorepo",
   "version": "0.0.2",
-  "description": "vscode extension starter",
+  "description": "vscode extension monorepo for mcd",
   "keywords": [
-    "vscode extension starter",
-    "vscode extension template"
+    "vscode mcd helper"
   ],
   "license": "MIT",
   "author": "tangdaoyuan <1197633750@qq.com> (https://github.com/tangdaoyuan/)",

@@ -1,3 +1,3 @@
-# vscode-extension-starter
+# vscode-mcd-helper
 
-> My personal vscode extension starter 
+> A little toy for mcd
