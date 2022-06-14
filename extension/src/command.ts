@@ -1,7 +1,8 @@
 import type { ExtensionContext } from 'vscode'
-import { commands, window } from 'vscode'
+import { commands, env, window } from 'vscode'
 import { OPENER_COMMAND } from './constant'
 import { getProjectName } from './loader'
+import { getDeployUrl } from './url'
 
 export default function registerCommands(context: ExtensionContext) {
   registerNowTimeCommand(context)
@@ -9,8 +10,8 @@ export default function registerCommands(context: ExtensionContext) {
 }
 
 function registerNowTimeCommand(context: ExtensionContext) {
-  const disposable = commands.registerCommand('mcd.now', () => {
-    window.showWarningMessage(`Current Time: ${new Date().toLocaleString()}`)
+  const disposable = commands.registerCommand('mcd.author', () => {
+    window.showInformationMessage('Current Maintainer: Tedy (tangdaoyuan)')
   })
   context.subscriptions.push(disposable)
 }
@@ -21,7 +22,7 @@ function registerMcdCommand(context: ExtensionContext) {
       const name = await getProjectName()
       if (!name)
         return
-      window.showWarningMessage(`${key} ${name} command is executed`)
+      env.openExternal(getDeployUrl(name, key))
     })
     context.subscriptions.push(dispose)
   }

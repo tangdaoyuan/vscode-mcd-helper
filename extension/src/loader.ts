@@ -12,7 +12,7 @@ export async function getProjectName() {
     return packageJSON.name as string
   }
   catch (error: any) {
-    window.showErrorMessage(`MCD: ${error.message}`)
+    window.showErrorMessage(`MCD Parser Error: ${error.message}`)
   }
   return null
 }
