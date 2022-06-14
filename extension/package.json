@@ -16,19 +16,33 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:tedystarter.helloTedy",
-    "onCommand:tedystarter.now"
+    "onCommand:mcd.now",
+    "onCommand:mcd.debug",
+    "onCommand:mcd.release",
+    "onCommand:mcd.production"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "tedystarter.helloTedy",
-        "title": "Hello Tedy"
+        "command": "mcd.now",
+        "title": "MCD Now"
       },
       {
-        "command": "tedystarter.now",
-        "title": "Now"
+        "command": "mcd.debug",
+        "title": "mcd goto Debug"
+      },
+      {
+        "command": "mcd.test",
+        "title": "mcd goto Test"
+      },
+      {
+        "command": "mcd.release",
+        "title": "mcd goto Release"
+      },
+      {
+        "command": "mcd.production",
+        "title": "mcd goto Production"
       }
     ]
   },
