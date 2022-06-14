@@ -5,5 +5,6 @@
 
 ## TODO
 
-- [ ] Scan package.json for git repository
-- [ ] Generate link to MCD different environments
+- [x] Scan package.json for git repository
+- [x] Generate link to MCD different environments
+- [ ] scan branch by (.git) directory from workspace 
