@@ -12,7 +12,7 @@ export function createOptions(options: MCDConfig) {
       config: 'appci/app-test.yaml',
     },
     release: {
-      config: 'appci/app-test.yaml',
+      config: 'appci/app-staging.yaml',
     },
     production: {
       config: 'appci/app-pro.yaml',
