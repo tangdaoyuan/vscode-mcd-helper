@@ -1,8 +1,8 @@
 import type { ExtensionContext } from 'vscode'
 import { commands, env, window } from 'vscode'
 import { OPENER_COMMAND } from './constant'
-import { getProjectName } from './loader'
-import { getDeployUrl } from './url'
+import { getProjectUri } from './loader'
+import { getOption } from './option'
 
 export default function registerCommands(context: ExtensionContext) {
   registerNowTimeCommand(context)
@@ -19,10 +19,13 @@ function registerNowTimeCommand(context: ExtensionContext) {
 function registerMcdCommand(context: ExtensionContext) {
   for (const key in OPENER_COMMAND) {
     const dispose = commands.registerCommand(OPENER_COMMAND[key], async() => {
-      const name = await getProjectName(key.toLowerCase())
-      if (!name)
+      const option = await getOption(key)
+      if (!option)
         return
-      env.openExternal(getDeployUrl(name, key))
+      const uri = await getProjectUri(option, key)
+      if (!uri)
+        return
+      env.openExternal(uri)
     })
     context.subscriptions.push(dispose)
   }

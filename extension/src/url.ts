@@ -6,12 +6,16 @@ export function getDeployUrl(projectName: string, environment: string, productio
   return Uri.parse(`https://${DOMAIN}/apps/${projectName}-${production}-${segmentFromEnv(environment)}/deploy`)
 }
 
-function segmentFromEnv(env: string) {
-  const _env = env.toLowerCase()
-  if (_env === 'production')
-    return 'prod'
-  if (_env === 'release')
-    return 'staging'
+const _MAP = {
+  debug: 'debug',
+  dev: 'test',
+  test: 'test',
+  release: 'staging',
+  staging: 'staging',
+  prod: 'prod',
+  pro: 'prod',
+} as Record<string, string>
 
-  return _env
+export function segmentFromEnv(env: string) {
+  return _MAP[env] || 'unknown'
 }
