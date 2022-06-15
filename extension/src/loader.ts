@@ -25,7 +25,7 @@ export async function getProjectName(env: string) {
     configFile = path.resolve(configFile)
     access(configFile)
     const content = await readFile(configFile, 'utf8')
-    return content.match(/^name\:\s+(?<name>.+)\s*$/)?.groups?.name
+    return content.match(/^name\:\s+(?<name>.+)\s*$/m)?.groups?.name
   }
   catch (error: any) {
     window.showErrorMessage(`MCD Parser Error: ${error.message}`)

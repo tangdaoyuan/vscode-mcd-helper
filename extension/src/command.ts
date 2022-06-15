@@ -19,7 +19,7 @@ function registerNowTimeCommand(context: ExtensionContext) {
 function registerMcdCommand(context: ExtensionContext) {
   for (const key in OPENER_COMMAND) {
     const dispose = commands.registerCommand(OPENER_COMMAND[key], async() => {
-      const name = await getProjectName()
+      const name = await getProjectName(key.toLowerCase())
       if (!name)
         return
       env.openExternal(getDeployUrl(name, key))
