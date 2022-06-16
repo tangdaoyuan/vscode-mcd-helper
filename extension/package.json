@@ -17,7 +17,9 @@
   ],
   "activationEvents": [
     "onCommand:mcd.author",
+    "onCommand:mcd",
     "onCommand:mcd.debug",
+    "onCommand:mcd.test",
     "onCommand:mcd.release",
     "onCommand:mcd.production"
   ],
@@ -27,6 +29,10 @@
       {
         "command": "mcd.author",
         "title": "MCD EX Author"
+      },
+      {
+        "command": "mcd",
+        "title": "MCD Open (Auto Detect)"
       },
       {
         "command": "mcd.debug",
@@ -46,17 +52,7 @@
       }
     ]
   },
-  "devDependencies": {
-    "@types/glob": "^7.2.0",
-    "@types/mocha": "^9.1.1",
-    "@types/node": "^14.18.20",
-    "@types/vscode": "^1.67.0",
-    "@typescript-eslint/eslint-plugin": "^5.27.0",
-    "@typescript-eslint/parser": "^5.27.0",
-    "@vscode/test-electron": "^2.1.3",
-    "eslint": "^8.17.0",
-    "glob": "^8.0.3",
-    "mocha": "^9.2.2",
-    "typescript": "^4.7.3"
-  }
+  "extensionDependencies": [
+    "vscode.git"
+  ]
 }
