@@ -1,15 +1,15 @@
 import type { ExtensionContext } from 'vscode'
-import { commands, env, window } from 'vscode'
+import { commands, env, extensions, window } from 'vscode'
 import { OPENER_COMMAND } from './constant'
 import { getProjectUri } from './loader'
 import { getOption } from './option'
 
 export default function registerCommands(context: ExtensionContext) {
-  registerNowTimeCommand(context)
+  registerExAuthoreCommand(context)
   registerMcdCommand(context)
 }
 
-function registerNowTimeCommand(context: ExtensionContext) {
+function registerExAuthoreCommand(context: ExtensionContext) {
   const disposable = commands.registerCommand('mcd.author', () => {
     window.showInformationMessage('Current Maintainer: Tedy (tangdaoyuan)')
   })
@@ -29,4 +29,18 @@ function registerMcdCommand(context: ExtensionContext) {
     })
     context.subscriptions.push(dispose)
   }
+
+  const disposable = commands.registerCommand('mcd', async() => {
+    const gitExtension = extensions.getExtension('vscode.git')?.exports
+    if (gitExtension) {
+      const api = gitExtension.getAPI(1)
+      const branchName = api?.repositories[0]?.state.HEAD?.name
+      if (!branchName)
+        return
+
+      // eslint-disable-next-line no-console
+      console.log(branchName)
+    }
+  })
+  context.subscriptions.push(disposable)
 }
