@@ -10,6 +10,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.27.0
       '@typescript-eslint/parser': ^5.27.0
       '@vscode/test-electron': ^2.1.3
+      defu: ^6.0.0
       eslint: ^8.17.0
       glob: ^8.0.3
       mocha: ^9.2.2
@@ -23,6 +24,7 @@ importers:
       '@typescript-eslint/eslint-plugin': 5.27.0_kor2e3kwnnzugzo3aovmfcq2la
       '@typescript-eslint/parser': 5.27.0_ud6rd4xtew5bv4yhvkvu24pzm4
       '@vscode/test-electron': 2.1.3
+      defu: 6.0.0
       eslint: 8.17.0
       glob: 8.0.3
       mocha: 9.2.2
@@ -799,6 +801,10 @@ packages:
     dependencies:
       has-property-descriptors: 1.0.0
       object-keys: 1.1.1
+    dev: true
+
+  /defu/6.0.0:
+    resolution: {integrity: sha512-t2MZGLf1V2rV4VBZbWIaXKdX/mUcYW0n2znQZoADBkGGxYL8EWqCuCZBmJPJ/Yy9fofJkyuuSuo5GSwo0XdEgw==}
     dev: true
 
   /diff/5.0.0:
