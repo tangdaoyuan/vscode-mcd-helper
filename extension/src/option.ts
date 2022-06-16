@@ -1,6 +1,6 @@
 import { readFile } from 'fs/promises'
 import { window, workspace } from 'vscode'
-import { ENV } from './constant'
+import { ENV, ENV_2_YAML } from './constant'
 
 export type MCDConfig = Record<string, {
   config: string
@@ -17,17 +17,10 @@ export async function getOption(environment: string) {
   return createOptions(packageJSON?.mcd)[environment]
 }
 
-const _MAP = {
-  debug: 'debug',
-  test: 'test',
-  release: 'staging',
-  production: 'pro',
-} as Record<string, string>
-
 export function createOptions(options: MCDConfig) {
   const defaultConfig = ENV.reduce((acc, cur) => {
     acc[cur.toLowerCase()] = {
-      config: `appci/app-${_MAP[cur] || cur}.yaml`,
+      config: `appci/app-${ENV_2_YAML[cur] || cur}.yaml`,
     }
     return acc
   }, {} as MCDConfig)

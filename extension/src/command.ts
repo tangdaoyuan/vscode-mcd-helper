@@ -1,6 +1,6 @@
 import type { ExtensionContext } from 'vscode'
 import { commands, env, extensions, window } from 'vscode'
-import { OPENER_COMMAND } from './constant'
+import { BRANCH_2_ENV, OPENER_COMMAND } from './constant'
 import { getProjectUri } from './loader'
 import { getOption } from './option'
 
@@ -32,15 +32,19 @@ function registerMcdCommand(context: ExtensionContext) {
 
   const disposable = commands.registerCommand('mcd', async() => {
     const gitExtension = extensions.getExtension('vscode.git')?.exports
-    if (gitExtension) {
-      const api = gitExtension.getAPI(1)
-      const branchName = api?.repositories[0]?.state.HEAD?.name
-      if (!branchName)
-        return
+    if (!gitExtension)
+      return
 
-      // eslint-disable-next-line no-console
-      console.log(branchName)
-    }
+    const api = gitExtension.getAPI(1)
+    const branchName = api?.repositories[0]?.state.HEAD?.name
+    if (!branchName)
+      return
+    if (!(branchName in BRANCH_2_ENV))
+      return
+
+    const env = BRANCH_2_ENV[branchName]
+    if (env in OPENER_COMMAND)
+      commands.executeCommand(OPENER_COMMAND[env])
   })
   context.subscriptions.push(disposable)
 }
