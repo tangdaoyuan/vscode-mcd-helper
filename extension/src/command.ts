@@ -1,6 +1,6 @@
 import type { ExtensionContext } from 'vscode'
 import { commands, env, extensions, window } from 'vscode'
-import { BRANCH_2_ENV, OPENER_COMMAND } from './constant'
+import { config } from './config'
 import { getProjectUri } from './loader'
 import { getOption } from './option'
 
@@ -17,8 +17,8 @@ function registerExAuthoreCommand(context: ExtensionContext) {
 }
 
 function registerMcdCommand(context: ExtensionContext) {
-  for (const key in OPENER_COMMAND) {
-    const dispose = commands.registerCommand(OPENER_COMMAND[key], async() => {
+  for (const key in config.mcd!.OPENER_COMMAND) {
+    const dispose = commands.registerCommand(config.mcd!.OPENER_COMMAND[key], async() => {
       const option = await getOption(key)
       if (!option)
         return
@@ -39,12 +39,12 @@ function registerMcdCommand(context: ExtensionContext) {
     const branchName = api?.repositories[0]?.state.HEAD?.name
     if (!branchName)
       return
-    if (!(branchName in BRANCH_2_ENV))
+    if (!(branchName in config.mcd!.BRANCH_2_ENV))
       return
 
-    const env = BRANCH_2_ENV[branchName]
-    if (env in OPENER_COMMAND)
-      commands.executeCommand(OPENER_COMMAND[env])
+    const env = config.mcd!.BRANCH_2_ENV[branchName]
+    if (env in config.mcd!.OPENER_COMMAND)
+      commands.executeCommand(config.mcd!.OPENER_COMMAND[env])
   })
   context.subscriptions.push(disposable)
 }

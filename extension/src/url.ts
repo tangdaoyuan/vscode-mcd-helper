@@ -1,5 +1,5 @@
 import { Uri } from 'vscode'
-import { ENV_2_DEPLOY } from './constant'
+import { config } from './config'
 
 const DOMAIN = 'mcd.mcd.megvii-inc.com'
 
@@ -8,5 +8,5 @@ export function getDeployUrl(projectName: string, environment: string, productio
 }
 
 export function segmentFromEnv(env: string) {
-  return ENV_2_DEPLOY[env] || 'unknown'
+  return config.mcd!.ENV_2_DEPLOY[env] || 'unknown'
 }

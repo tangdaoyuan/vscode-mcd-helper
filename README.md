@@ -8,5 +8,5 @@
 - [x] Scan package.json for git repository
 - [x] Generate links to MCD in different environments
 - [x] scan branch by git extension from workspace 
-- [ ] support for custom environments
+- [x] support for custom environments
 - [ ] support to display command in the Tree view
