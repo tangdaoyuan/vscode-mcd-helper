@@ -65,6 +65,10 @@ function getTreeItem(key: string): vscode.TreeItem {
       label: key.toUpperCase(),
     },
     tooltip,
+    command: {
+      title: key,
+      command: `mcd.${key}`,
+    },
     collapsibleState: hasChildren
       ? vscode.TreeItemCollapsibleState.Collapsed
       : vscode.TreeItemCollapsibleState.None,
