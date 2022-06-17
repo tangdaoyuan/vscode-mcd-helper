@@ -15,6 +15,7 @@
   "categories": [
     "Other"
   ],
+  "icon": "res/logo.png",
   "activationEvents": [
     "onCommand:mcd.author",
     "onCommand:mcd",
