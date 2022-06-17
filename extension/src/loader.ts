@@ -4,17 +4,15 @@ import { window, workspace } from 'vscode'
 import type { MCDConfig } from './option'
 import { getDeployUrl } from './url'
 
+let packageJSON: Record<string, any> | null = null
+const yamlConfig = new Map<string, string>()
+
 export async function getProjectName(configPath: string) {
-  try {
-    const configFile = path.resolve(configPath)
-    access(configFile)
-    const content = await readFile(configFile, 'utf8')
-    return content.match(/^name\:\s+(?<name>.+)\s*$/m)?.groups?.name
-  }
-  catch (error: any) {
-    window.showErrorMessage(`MCD Parser Error: ${error.message}`)
-  }
-  return null
+  const content = await loadYamlConfig(configPath)
+  if (!content)
+    return
+
+  return content.match(/^name\:\s+(?<name>.+)\s*$/m)?.groups?.name
 }
 
 export async function getProjectUri(option: MCDConfig[0], environment: string) {
@@ -26,9 +24,23 @@ export async function getProjectUri(option: MCDConfig[0], environment: string) {
   return getDeployUrl(name, environment)
 }
 
-let packageJSON: Record<string, any> | null = null
+export async function loadYamlConfig(configPath: string) {
+  if (yamlConfig.has(path.resolve(configPath)))
+    return yamlConfig.get(path.resolve(configPath))
 
-export async function getPackageJson() {
+  try {
+    const configFile = path.resolve(configPath)
+    await access(configFile)
+    const content = await readFile(configFile, 'utf8')
+    return content
+  }
+  catch (error: any) {
+    window.showErrorMessage(`MCD Parser Error: ${error.message}`)
+  }
+  return null
+}
+
+export async function loadPackageJson() {
   const results = await workspace.findFiles('**/package.json', '**/node_modules/**;**/.vscode/**', 1)
   if (!results?.length)
     return null
