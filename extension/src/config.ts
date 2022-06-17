@@ -1,7 +1,7 @@
 import { workspace } from 'vscode'
 import { $PREFIX, ENV as _ENV } from './constant'
 
-export const config: Record<'mcd', ReturnType<typeof initConfig> | null> = {
+export const config: Record<'mcd', Config | null> = {
   mcd: null,
 }
 
@@ -50,3 +50,5 @@ export function initConfig() {
 
   return mcd
 }
+
+export type Config = ReturnType<typeof initConfig>

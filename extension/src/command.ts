@@ -18,15 +18,17 @@ function registerExAuthoreCommand(context: ExtensionContext) {
 
 function registerMcdCommand(context: ExtensionContext) {
   for (const key in config.mcd!.OPENER_COMMAND) {
-    const dispose = commands.registerCommand(config.mcd!.OPENER_COMMAND[key], async() => {
-      const option = await getOption(key)
-      if (!option)
-        return
-      const uri = await getProjectUri(option, key)
-      if (!uri)
-        return
-      env.openExternal(uri)
-    })
+    const dispose = commands.registerCommand(
+      config.mcd!.OPENER_COMMAND[key],
+      async() => {
+        const option = await getOption(key)
+        if (!option)
+          return
+        const uri = await getProjectUri(option, key)
+        if (!uri)
+          return
+        env.openExternal(uri)
+      })
     context.subscriptions.push(dispose)
   }
 

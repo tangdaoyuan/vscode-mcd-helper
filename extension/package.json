@@ -21,10 +21,19 @@
     "onCommand:mcd.debug",
     "onCommand:mcd.test",
     "onCommand:mcd.release",
-    "onCommand:mcd.production"
+    "onCommand:mcd.production",
+    "onView:mcdDeployHelper"
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "mcdDeployHelper",
+          "name": "MCD Deployment Helper"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "mcd.author",
