@@ -48,7 +48,7 @@
       },
       {
         "command": "mcd.production",
-        "title": "MCD open Production"
+        "title": "MCD Open Production"
       }
     ],
     "configuration": {
