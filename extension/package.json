@@ -23,14 +23,14 @@
     "onCommand:mcd.test",
     "onCommand:mcd.release",
     "onCommand:mcd.production",
-    "onView:mcdDeployHelper"
+    "onView:mcdDeployHelperView"
   ],
   "main": "./dist/extension.js",
   "contributes": {
     "views": {
       "explorer": [
         {
-          "id": "mcdDeployHelper",
+          "id": "mcdDeployHelperView",
           "name": "MCD Deployment Helper"
         }
       ]
