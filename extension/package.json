@@ -27,7 +27,22 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "mcd-explorer",
+          "title": "MCD Deployment Helper",
+          "icon": "res/logo.png"
+        }
+      ]
+    },
     "views": {
+      "mcd-explorer": [
+        {
+          "id": "mcdDeployHelperExplorer",
+          "name": "MCD Deployment Helper"
+        }
+      ],
       "explorer": [
         {
           "id": "mcdDeployHelperView",
