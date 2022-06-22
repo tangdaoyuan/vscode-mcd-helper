@@ -15,10 +15,10 @@ export async function getOption(environment: string) {
   if (!packageJSON)
     return null
 
-  return createOptions(packageJSON?.mcd)[environment]
+  return createOptions(packageJSON?.mcd, environment)[environment]
 }
 
-export function createOptions(options: MCDConfig) {
+export function createOptions(options: MCDConfig, environment?: string) {
   const defaultConfig = config.mcd!.ENV.reduce((acc, cur) => {
     const _config = `appci/app-${config.mcd!.ENV_2_YAML[cur] || cur}.yaml`
     acc[cur.toLowerCase()] = {
@@ -32,7 +32,11 @@ export function createOptions(options: MCDConfig) {
 
   const root = workspace.workspaceFolders?.[0].uri.path
   if (root) {
-    Object.values(configs).forEach(async(c) => {
+    const keys = Object
+      .keys(configs)
+      .filter(c => !environment || environment === c)
+    keys.forEach(async(key) => {
+      const c = configs[key]
       if (!path.isAbsolute(c.config))
         c.config = path.resolve(root, c.config)
 

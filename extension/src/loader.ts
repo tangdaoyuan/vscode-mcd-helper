@@ -41,6 +41,9 @@ export async function loadYamlConfig(configPath: string) {
 }
 
 export async function loadPackageJson() {
+  if (packageJSON)
+    return packageJSON
+
   const results = await workspace.findFiles('**/package.json', '**/node_modules/**;**/.vscode/**', 1)
   if (!results?.length)
     return null
