@@ -4,9 +4,9 @@ import { initConfig } from './config'
 import { initOptions } from './option'
 import registerView from './view'
 
-export function activate(context: ExtensionContext) {
+export async function activate(context: ExtensionContext) {
   const conf = initConfig()
-  initOptions(conf)
+  await initOptions(conf)
   registerView(context, conf)
   registerCommands(context)
 }

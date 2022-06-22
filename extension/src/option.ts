@@ -1,4 +1,6 @@
+import path from 'path'
 import { defu } from 'defu'
+import { workspace } from 'vscode'
 import type { Config } from './config'
 import { config } from './config'
 import { loadPackageJson, loadYamlConfig } from './loader'
@@ -26,11 +28,19 @@ export function createOptions(options: MCDConfig) {
     return acc
   }, {} as MCDConfig)
 
-  Object.values(defaultConfig).forEach(async(c) => {
-    await loadYamlConfig(c.config)
-  })
+  const configs = defu(options, defaultConfig)
 
-  return defu(options, defaultConfig)
+  const root = workspace.workspaceFolders?.[0].uri.path
+  if (root) {
+    Object.values(configs).forEach(async(c) => {
+      if (!path.isAbsolute(c.config))
+        c.config = path.resolve(root, c.config)
+
+      await loadYamlConfig(c.config)
+    })
+  }
+
+  return configs
 }
 
 export async function initOptions(config: Config) {
