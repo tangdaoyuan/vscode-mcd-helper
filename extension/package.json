@@ -1,7 +1,7 @@
 {
   "name": "vscode-mcd-helper",
   "displayName": "Vscode Mcd Helper",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "vscode extension for mcd",
   "repository": {
     "type": "git",
