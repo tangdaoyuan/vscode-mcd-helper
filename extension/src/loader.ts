@@ -1,6 +1,5 @@
-import { access, readFile } from 'fs/promises'
-import path from 'path'
-import { window, workspace } from 'vscode'
+import path from 'path/posix'
+import { Uri, window, workspace } from 'vscode'
 import type { MCDConfig } from './option'
 import { getDeployUrl } from './url'
 
@@ -30,9 +29,8 @@ export async function loadYamlConfig(configPath: string) {
 
   try {
     const configFile = path.resolve(configPath)
-    await access(configFile)
-    const content = await readFile(configFile, 'utf8')
-    return content
+    const content = await workspace.fs.readFile(Uri.parse(configFile))
+    return content.toString()
   }
   catch (error: any) {
     window.showErrorMessage(`MCD Parser Error: ${error.message}`)
@@ -44,13 +42,13 @@ export async function loadPackageJson() {
   if (packageJSON)
     return packageJSON
 
-  const results = await workspace.findFiles('**/package.json', '**/node_modules/**;**/.vscode/**', 1)
+  const results = await workspace.findFiles('**/package.json', '{**/node_modules/**,**/.vscode/**}', 1)
   if (!results?.length)
     return null
 
   try {
-    const content = await readFile(results[0].path, 'utf8')
-    packageJSON = JSON.parse(content)
+    const content = await workspace.fs.readFile(results[0])
+    packageJSON = JSON.parse(content.toString())
     return packageJSON
   }
   catch (error: any) {

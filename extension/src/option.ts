@@ -1,4 +1,4 @@
-import path from 'path'
+import path from 'path/posix'
 import { defu } from 'defu'
 import { workspace } from 'vscode'
 import type { Config } from './config'
