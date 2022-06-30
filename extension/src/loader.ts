@@ -20,7 +20,7 @@ export async function getProjectUri(option: MCDConfig[0], environment: string) {
   const name = await getProjectName(option.config)
   if (!name)
     return ''
-  return getDeployUrl(name, environment)
+  return getDeployUrl(name, environment, option.production)
 }
 
 export async function loadYamlConfig(configPath: string) {

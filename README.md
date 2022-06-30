@@ -10,6 +10,6 @@
 - [x] scan branch by git extension from workspace 
 - [x] support for custom environments
 - [x] support to display command in the Tree view
-- [ ] configuration for production
+- [x] configuration for production
 - [ ] refresh view
 - [ ] reactivity for updating configuration 

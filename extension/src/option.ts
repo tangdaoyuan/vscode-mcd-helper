@@ -7,6 +7,7 @@ import { loadPackageJson, loadYamlConfig } from './loader'
 
 export type MCDConfig = Record<string, {
   config: string
+  production: string
 }>
 
 export async function getOption(environment: string) {
@@ -23,6 +24,7 @@ export function createOptions(options: MCDConfig, environment?: string) {
     const _config = `appci/app-${config.mcd!.ENV_2_YAML[cur] || cur}.yaml`
     acc[cur.toLowerCase()] = {
       config: _config,
+      production: 'galaxy',
     }
 
     return acc
